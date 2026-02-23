@@ -1,8 +1,10 @@
 package com.back.domain.wiseSaying.entity;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
 public class Post {
 
     @Id // 기본키
@@ -14,4 +16,9 @@ public class Post {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
+    public Post(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
