@@ -16,12 +16,14 @@ public class PostService {
 
     public Post write(String title, String content){
 
-        if(title.length() < 10){
-
-        }
-
         Post post = new Post(title, content);
         return postRepository.save(post);
+    }
+
+    public Post modify(Post post, String title, String content){
+        post.setTitle(title);
+        post.setContent(content);
+        return post;
     }
 
     public Optional<Post> findById(int id){
