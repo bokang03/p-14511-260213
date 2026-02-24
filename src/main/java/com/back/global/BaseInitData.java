@@ -22,12 +22,13 @@ public class BaseInitData {
     private final PostService postService;
 
     @Bean
-    ApplicationRunner initDataRunner() {
+    ApplicationRunner devInitData() {
         return args -> {
 
             self.work1();
             self.work2();
             self.work3();
+
         };
     }
 
@@ -53,11 +54,11 @@ public class BaseInitData {
         // select * from post where id = 1;
     }
 
+
     @Transactional
-    void work3(){
+    void work3() {
         Post post = postService.findById(1).get();
         postService.modify(post, "제목1-1", "내용1-1");
     }
-
 
 }

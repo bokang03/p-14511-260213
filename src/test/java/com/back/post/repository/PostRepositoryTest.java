@@ -5,7 +5,6 @@ import com.back.domain.post.repositoty.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-@Rollback
 @ActiveProfiles("test")
 public class PostRepositoryTest {
 
@@ -23,24 +21,23 @@ public class PostRepositoryTest {
 
     @Test
     void t1() {
-        Post post1 = postRepository.findById(2).get();
+        Post post = postRepository.findById(2).get();
 
-        assertThat(post1.getId()).isEqualTo(2);
-        assertThat(post1.getTitle()).isEqualTo("제목2");
-        assertThat(post1.getContent()).isEqualTo("내용2");
+        assertThat(post.getId()).isEqualTo(2);
+        assertThat(post.getTitle()).isEqualTo("테스트 제목2");
+        assertThat(post.getContent()).isEqualTo("테스트 내용2");
     }
 
     @Test
     void t2() {
 
-        Post post = new Post("제목3", "내용3");
-
-
+        Post post = new Post("테스트 제목3", "테스트 내용3");
         Post savedPost = postRepository.save(post);
 
         assertThat(savedPost.getId()).isNotNull();
-        assertThat(savedPost.getTitle()).isEqualTo("제목3");
-        assertThat(savedPost.getContent()).isEqualTo("내용3");
+        assertThat(savedPost.getTitle()).isEqualTo("테스트 제목3");
+        assertThat(savedPost.getContent()).isEqualTo("테스트 내용3");
+
     }
 
     @Test
@@ -48,5 +45,4 @@ public class PostRepositoryTest {
         long cnt = postRepository.count();
         assertThat(cnt).isEqualTo(2);
     }
-
 }
